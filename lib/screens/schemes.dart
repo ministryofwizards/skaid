@@ -72,12 +72,23 @@ class _SchemesState extends State<Schemes> {
                                     width: 250.0,
                                     height: 150.0,
                                     child: ListTile(
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (BuildContext context) =>
+                                                    Screen1(obj: Scheme.fromSnapShot(snapshot.data.documents[index]))));
+                                      },
                                       title: Text(Scheme.fromSnapShot(snapshot.data.documents[index]).scTitle),
                                       isThreeLine: true,
                                       subtitle: Text("\n\n"+Scheme.fromSnapShot(snapshot.data.documents[index]).scDesc,maxLines: 5,),
                                     )
                                 )
                             )
+                        );
+                      }else{
+                        return Center(
+                          child: CircularProgressIndicator(),
                         );
                       }
                     })
@@ -130,6 +141,10 @@ class _SchemesState extends State<Schemes> {
                                     )
                                 )
                             )
+                        );
+                      }else{
+                        return Center(
+                          child: CircularProgressIndicator(),
                         );
                       }
                     })

@@ -28,7 +28,7 @@ class Screen1 extends StatelessWidget {
               }),
         ),
         body: Container(
-          margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 260.0),
+          margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 60.0),
           child: Center(
             child: Card(
               elevation: 5.0,
