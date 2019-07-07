@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:skaid/model/card.dart';
+import 'package:skaid/network/apis.dart';
+import 'package:skaid/network/model/Scheme.dart';
 
 class Schemes extends StatefulWidget {
   @override
@@ -49,16 +52,31 @@ class _SchemesState extends State<Schemes> {
                 height: 300,
                 width: MediaQuery.of(context).size.width,
 
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  shrinkWrap: true,
-                  padding: EdgeInsets.symmetric(vertical: 20.0,horizontal: 20.0),
-                  children: <Widget>[
-                    ModelCard(),
-                    ModelCard(),
-                    ModelCard(),
-                  ],
-                ),
+                child: StreamBuilder<QuerySnapshot>(
+                    stream: getSchemes(),
+                    builder: (context,snapshot){
+                    if(snapshot.hasData){
+                      return ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount:snapshot.data.documents.length ,
+                          itemBuilder: (context,index)=>Card(
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                          margin: EdgeInsets.symmetric(vertical: 10.0,horizontal: 10.0),
+                          elevation: 5.0,
+                          borderOnForeground: true,
+                          child: Container(
+                              margin: EdgeInsets.all(20.0),
+                              width: 250.0,
+                              height: 150.0,
+                              child: ListTile(
+                                title: Text(Scheme.fromSnapShot(snapshot.data.documents[index]).scTitle),
+                                subtitle: Text(Scheme.fromSnapShot(snapshot.data.documents[index]).scDesc),
+                              )
+                          )
+                      )
+                      );
+                    }
+                })
               ),
             ),
             Align(
@@ -76,16 +94,31 @@ class _SchemesState extends State<Schemes> {
                 height: 300,
                 width: MediaQuery.of(context).size.width,
 
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  shrinkWrap: true,
-                  padding: EdgeInsets.symmetric(vertical: 20.0,horizontal: 20.0),
-                  children: <Widget>[
-                    ModelCard(),
-                    ModelCard(),
-                    ModelCard(),
-                  ],
-                ),
+                child:StreamBuilder<QuerySnapshot>(
+                    stream: getSchemes(),
+                    builder: (context,snapshot){
+                      if(snapshot.hasData){
+                        return ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount:snapshot.data.documents.length ,
+                            itemBuilder: (context,index)=>Card(
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                                margin: EdgeInsets.symmetric(vertical: 10.0,horizontal: 10.0),
+                                elevation: 5.0,
+                                borderOnForeground: true,
+                                child: Container(
+                                    margin: EdgeInsets.all(20.0),
+                                    width: 250.0,
+                                    height: 150.0,
+                                    child: ListTile(
+                                      title: Text(Scheme.fromSnapShot(snapshot.data.documents[index]).scTitle),
+                                      subtitle: Text(Scheme.fromSnapShot(snapshot.data.documents[index]).scDesc),
+                                    )
+                                )
+                            )
+                        );
+                      }
+                    })
               ),
             )
           ],
