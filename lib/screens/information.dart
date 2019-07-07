@@ -36,6 +36,7 @@ class Screen1 extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10.0)),
               child: ListView(
                   physics:PageScrollPhysics(),
+                  padding: EdgeInsets.symmetric(vertical: 20.0),
                   children: <Widget>[
                     ListTile(
                       title: Text(

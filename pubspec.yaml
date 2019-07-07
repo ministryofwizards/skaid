@@ -28,7 +28,7 @@ dependencies:
   # Firebase
   firebase_core: ^0.2.5
   cloud_firestore: any
-  image_picker_modern: any
+  image_picker_modern:
 
 dev_dependencies:
   flutter_test:

@@ -1,9 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:skaid/model/card.dart';
 import 'package:skaid/network/apis.dart';
 import 'package:skaid/network/model/Scheme.dart';
 import 'package:skaid/screens/information.dart';
+
+import '../style.dart';
 
 class Schemes extends StatefulWidget {
   @override
@@ -39,12 +40,7 @@ class _SchemesState extends State<Schemes> {
 
             Align(
               alignment: Alignment.topLeft,
-              child: Text("  \n \t \t \t Relevant",textAlign:TextAlign.start,style: TextStyle(
-                fontWeight: FontWeight.w700,
-                color: Colors.white,
-                fontSize: 20,
-
-              ),),
+              child: Text("  \n \t \t \t Relevant",textAlign:TextAlign.start,style:sectionLabel,),
             ),
             Expanded(
               flex: 1,
@@ -96,12 +92,7 @@ class _SchemesState extends State<Schemes> {
             ),
             Align(
               alignment: Alignment.topLeft,
-              child: Text(" \t \t \t All",textAlign:TextAlign.start,style: TextStyle(
-                fontWeight: FontWeight.w700,
-                fontSize: 20,
-                color: Colors.white
-
-              ),),
+              child: Text(" \t \t \t All",textAlign:TextAlign.start,style: sectionLabel,),
             ),
             Expanded(
               flex: 1,
