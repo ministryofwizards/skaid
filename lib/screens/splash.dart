@@ -1,13 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:skaid/screens/schemes.dart';
+import 'package:skaid/screens/home.dart';
 
 class SplashScreen extends StatefulWidget {
-@override
-SplashScreenState createState() {
-  return new SplashScreenState();
-}
+  @override
+  SplashScreenState createState() {
+    return new SplashScreenState();
+  }
 }
 
 class SplashScreenState extends State<SplashScreen> {
@@ -24,7 +24,7 @@ class SplashScreenState extends State<SplashScreen> {
 
   navigate() {
     Navigator.of(context)
-        .pushReplacement(MaterialPageRoute(builder: (context) => Schemes()));
+        .pushReplacement(MaterialPageRoute(builder: (context) => Home()));
   }
 
   @override
@@ -40,6 +40,7 @@ class SplashScreenState extends State<SplashScreen> {
     );
   }
 }
+
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
