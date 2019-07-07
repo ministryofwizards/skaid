@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:skaid/screens/report_form.dart';
+import 'package:skaid/screens/report_status.dart';
 import 'package:skaid/screens/schemes.dart';
 
 class Home extends StatelessWidget {
@@ -37,7 +38,7 @@ class Home extends StatelessWidget {
             //Global Meetup
             Schemes(),
             //Local Meetup
-            ReportForm(),
+            ReportStatus(),
           ],
         ),
       ),
