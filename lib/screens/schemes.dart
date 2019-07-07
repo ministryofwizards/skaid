@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:skaid/model/card.dart';
 import 'package:skaid/network/apis.dart';
 import 'package:skaid/network/model/Scheme.dart';
+import 'package:skaid/screens/information.dart';
 
 class Schemes extends StatefulWidget {
   @override
@@ -55,28 +56,31 @@ class _SchemesState extends State<Schemes> {
                 child: StreamBuilder<QuerySnapshot>(
                     stream: getSchemes(),
                     builder: (context,snapshot){
-                    if(snapshot.hasData){
-                      return ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount:snapshot.data.documents.length ,
-                          itemBuilder: (context,index)=>Card(
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20.0))),
-                          margin: EdgeInsets.symmetric(vertical: 10.0,horizontal: 10.0),
-                          elevation: 5.0,
-                          borderOnForeground: true,
-                          child: Container(
-                              margin: EdgeInsets.all(20.0),
-                              width: 250.0,
-                              height: 150.0,
-                              child: ListTile(
-                                title: Text(Scheme.fromSnapShot(snapshot.data.documents[index]).scTitle),
-                                subtitle: Text(Scheme.fromSnapShot(snapshot.data.documents[index]).scDesc),
-                              )
-                          )
-                      )
-                      );
-                    }
-                })
+                      if(snapshot.hasData){
+                        return ListView.builder(
+                          physics: BouncingScrollPhysics(),
+                            padding: EdgeInsets.all(20.0),
+                            scrollDirection: Axis.horizontal,
+                            itemCount:snapshot.data.documents.length ,
+                            itemBuilder: (context,index)=>Card(
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                                margin: EdgeInsets.symmetric(vertical: 10.0,horizontal: 10.0),
+                                elevation: 5.0,
+                                borderOnForeground: true,
+                                child: Container(
+                                    margin: EdgeInsets.all(30.0),
+                                    width: 250.0,
+                                    height: 150.0,
+                                    child: ListTile(
+                                      title: Text(Scheme.fromSnapShot(snapshot.data.documents[index]).scTitle),
+                                      isThreeLine: true,
+                                      subtitle: Text("\n\n"+Scheme.fromSnapShot(snapshot.data.documents[index]).scDesc,maxLines: 5,),
+                                    )
+                                )
+                            )
+                        );
+                      }
+                    })
               ),
             ),
             Align(
@@ -99,6 +103,8 @@ class _SchemesState extends State<Schemes> {
                     builder: (context,snapshot){
                       if(snapshot.hasData){
                         return ListView.builder(
+                          physics: BouncingScrollPhysics(),
+                          padding: EdgeInsets.all(20.0),
                             scrollDirection: Axis.horizontal,
                             itemCount:snapshot.data.documents.length ,
                             itemBuilder: (context,index)=>Card(
@@ -107,12 +113,20 @@ class _SchemesState extends State<Schemes> {
                                 elevation: 5.0,
                                 borderOnForeground: true,
                                 child: Container(
-                                    margin: EdgeInsets.all(20.0),
+                                    margin: EdgeInsets.all(30.0),
                                     width: 250.0,
                                     height: 150.0,
                                     child: ListTile(
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (BuildContext context) =>
+                                                    Screen1(obj: Scheme.fromSnapShot(snapshot.data.documents[index]))));
+                                      },
                                       title: Text(Scheme.fromSnapShot(snapshot.data.documents[index]).scTitle),
-                                      subtitle: Text(Scheme.fromSnapShot(snapshot.data.documents[index]).scDesc),
+                                      isThreeLine: true,
+                                      subtitle: Text("\n\n"+Scheme.fromSnapShot(snapshot.data.documents[index]).scDesc,maxLines: 5,),
                                     )
                                 )
                             )
