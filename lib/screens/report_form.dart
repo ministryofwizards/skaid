@@ -1,6 +1,27 @@
-import 'package:flutter/material.dart';
+import 'dart:io';
 
-class ReportForm extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:image_picker_modern/image_picker_modern.dart';
+
+
+
+class ReportForm extends StatefulWidget {
+  @override
+  _ReportFormState createState() => _ReportFormState();
+}
+
+class _ReportFormState extends State<ReportForm> {
+
+  File _image;
+
+  Future getImage() async {
+    var image = await ImagePicker.pickImage(source: ImageSource.camera);
+
+    setState(() {
+      _image = image;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -10,9 +31,9 @@ class ReportForm extends StatelessWidget {
         children: <Widget>[
           Expanded(
             flex: 2,
-            child: Image.asset(
-              'assets/images/placeholder.png',
-            ),
+            child: _image == null
+                ? Image.asset('assets/images/placeholder.png')
+                : Image.file(_image),
           ),
           Align(
             alignment: Alignment.centerLeft,
@@ -52,7 +73,9 @@ class ReportForm extends StatelessWidget {
             shape: const BeveledRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(7.0)),
             ),
-            onPressed: () {},
+            onPressed: () {
+              getImage();
+            },
           )
         ],
       ),
