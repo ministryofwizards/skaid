@@ -14,7 +14,8 @@ class _ReportStatusState extends State<ReportStatus> {
   Widget build(BuildContext context) {
     return Scaffold(
         floatingActionButton: new FloatingActionButton(
-          child: Text("New"),
+          child: Icon(Icons.add_a_photo,color: Color.fromRGBO(255, 175, 123,1),),
+          backgroundColor:Color.fromRGBO(58, 28, 113,1) ,
           onPressed: () {
             Navigator.push(
               context,
@@ -92,6 +93,10 @@ class _ReportStatusState extends State<ReportStatus> {
                                             maxLines: 5,
                                           ),
                                         ))));
+                          }else{
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
                           }
                         })),
               ),
@@ -158,6 +163,10 @@ class _ReportStatusState extends State<ReportStatus> {
                                             maxLines: 5,
                                           ),
                                         ))));
+                          }else{
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
                           }
                         })),
               )
