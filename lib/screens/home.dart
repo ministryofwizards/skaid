@@ -27,7 +27,7 @@ class Home extends StatelessWidget {
                 icon: Icon(Icons.import_contacts,),
               ),
               Tab(
-                text: 'Reports',
+                text: 'Request',
                 icon: Icon(Icons.assignment,),
               ),
             ],

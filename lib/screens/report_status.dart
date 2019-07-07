@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:skaid/network/apis.dart';
+import 'package:skaid/network/model/Request.dart';
 import 'package:skaid/network/model/Scheme.dart';
 import 'package:skaid/screens/report_form.dart';
 
@@ -14,8 +15,11 @@ class _ReportStatusState extends State<ReportStatus> {
   Widget build(BuildContext context) {
     return Scaffold(
         floatingActionButton: new FloatingActionButton(
-          child: Icon(Icons.add_a_photo,color: Color.fromRGBO(255, 175, 123,1),),
-          backgroundColor:Color.fromRGBO(58, 28, 113,1) ,
+          child: Icon(
+            Icons.add_a_photo,
+            color: Color.fromRGBO(255, 175, 123, 1),
+          ),
+          backgroundColor: Color.fromRGBO(58, 28, 113, 1),
           onPressed: () {
             Navigator.push(
               context,
@@ -41,31 +45,20 @@ class _ReportStatusState extends State<ReportStatus> {
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              Align(
-                alignment: Alignment.topLeft,
-                child: Text(
-                  "  \n \t \t \t Pending",
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w700,
-                    color: Colors.white,
-                    fontSize: 20,
-                  ),
-                ),
-              ),
+
               Expanded(
                 flex: 1,
                 child: Container(
                     height: 300,
                     width: MediaQuery.of(context).size.width,
                     child: StreamBuilder<QuerySnapshot>(
-                        stream: getSchemes(),
+                        stream: getRequests(),
                         builder: (context, snapshot) {
                           if (snapshot.hasData) {
                             return ListView.builder(
                                 physics: BouncingScrollPhysics(),
                                 padding: EdgeInsets.all(20.0),
-                                scrollDirection: Axis.horizontal,
+                                scrollDirection: Axis.vertical,
                                 itemCount: snapshot.data.documents.length,
                                 itemBuilder: (context, index) => Card(
                                     shape: RoundedRectangleBorder(
@@ -80,96 +73,35 @@ class _ReportStatusState extends State<ReportStatus> {
                                         width: 250.0,
                                         height: 150.0,
                                         child: ListTile(
-                                          title: Text(Scheme.fromSnapShot(
+                                          leading: Icon(
+                                            Icons.adjust,
+                                            color: Request.fromSnapShot(snapshot
+                                                        .data.documents[index])
+                                                    .requestStatus
+                                                ? Colors.green
+                                                : Colors.red,
+                                          ),
+                                          title: Text(Request.fromSnapShot(
                                                   snapshot
                                                       .data.documents[index])
-                                              .scTitle),
+                                              .orgName),
                                           isThreeLine: true,
                                           subtitle: Text(
                                             "\n\n" +
-                                                Scheme.fromSnapShot(snapshot
+                                                Request.fromSnapShot(snapshot
                                                         .data.documents[index])
-                                                    .scDesc,
+                                                    .userComments,
                                             maxLines: 5,
                                           ),
                                         ))));
-                          }else{
+                          } else {
                             return Center(
                               child: CircularProgressIndicator(),
                             );
                           }
                         })),
               ),
-              Align(
-                alignment: Alignment.topLeft,
-                child: Text(
-                  " \t \t \t Completed",
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 20,
-                      color: Colors.white),
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: Container(
-                    height: 300,
-                    width: MediaQuery.of(context).size.width,
-                    child: StreamBuilder<QuerySnapshot>(
-                        stream: getSchemes(),
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData) {
-                            return ListView.builder(
-                                physics: BouncingScrollPhysics(),
-                                padding: EdgeInsets.all(20.0),
-                                scrollDirection: Axis.horizontal,
-                                itemCount: snapshot.data.documents.length,
-                                itemBuilder: (context, index) => Card(
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(20.0))),
-                                    margin: EdgeInsets.symmetric(
-                                        vertical: 10.0, horizontal: 10.0),
-                                    elevation: 5.0,
-                                    borderOnForeground: true,
-                                    child: Container(
-                                        margin: EdgeInsets.all(30.0),
-                                        width: 250.0,
-                                        height: 150.0,
-                                        child: ListTile(
-                                          onTap: () {
-                                            /*Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (BuildContext
-                                                            context) =>
-                                                        Screen1(
-                                                            obj: Scheme.fromSnapShot(
-                                                                snapshot.data
-                                                                        .documents[
-                                                                    index]))));*/
-                                          },
-                                          title: Text(Scheme.fromSnapShot(
-                                                  snapshot
-                                                      .data.documents[index])
-                                              .scTitle),
-                                          isThreeLine: true,
-                                          subtitle: Text(
-                                            "\n\n" +
-                                                Scheme.fromSnapShot(snapshot
-                                                        .data.documents[index])
-                                                    .scDesc,
-                                            maxLines: 5,
-                                          ),
-                                        ))));
-                          }else{
-                            return Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          }
-                        })),
-              )
+
             ],
           ),
         ]));

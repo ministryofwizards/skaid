@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:skaid/network/model/Scheme.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Screen1 extends StatelessWidget {
 
@@ -39,7 +40,7 @@ class Screen1 extends StatelessWidget {
                   padding: EdgeInsets.symmetric(vertical: 20.0),
                   children: <Widget>[
                     ListTile(
-                      title: Text(
+                      title: Text("\n\n"+
                         obj.scTitle,
                         style: TextStyle(
                           fontSize: 26.0,
@@ -47,12 +48,19 @@ class Screen1 extends StatelessWidget {
                         ),
                         textAlign: TextAlign.center,
                       ),
-                      subtitle: Text(
+                      subtitle: Text("\n\n\n"+
                         obj.scDesc,
                         maxLines: 20,
                         textAlign: TextAlign.center,
                       ),
                     ),
+                    InkWell(
+                      onTap: _openURL,
+                      child: Text("\n\nPhone :"+obj.phone,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.black,
+                        fontSize: 24),),
+                    )
                   ]),
             ),
           ),
@@ -60,4 +68,14 @@ class Screen1 extends StatelessWidget {
       ),
     );
   }
+  Future _openURL() async{
+    print('open click');
+    int ph = int.tryParse(obj.phone);
+    var url ="tel:$ph";
+    if(await canLaunch(url))
+      launch(url);
+    else
+      print('cant open launcher');
+  }
 }
+
