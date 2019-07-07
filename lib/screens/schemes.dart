@@ -24,7 +24,7 @@ class _SchemesState extends State<Schemes> {
             ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              stops: [0.2,0.5,0.7]
+              stops: [0.3,0.6,0.8]
              )
           ),
         ),
@@ -32,9 +32,7 @@ class _SchemesState extends State<Schemes> {
 
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            SizedBox(
-              height:40.0,
-            ),
+
             Align(
               alignment: Alignment.topLeft,
               child: Text("  \n \t \t \t Relevant",textAlign:TextAlign.start,style: TextStyle(
