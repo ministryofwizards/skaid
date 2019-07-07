@@ -1,11 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Category {
-
   int catId;
   String catName;
   String catDesc;
   String catUrl;
+
+  Category() {}
 
   Category.fromSnapShot(DocumentSnapshot snapshot) {
     catId = snapshot['cat_id'];

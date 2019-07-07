@@ -4,12 +4,14 @@ class Ngo {
   
   int catId;
   String ngoName;
+  String phone;
 
   Ngo() {}
 
   Ngo.fromSnapShot(DocumentSnapshot snapshot) {
     catId = snapshot['cat_id'];
     ngoName = snapshot['ngo_name'];
+    phone = snapshot['phone'];
   }
 
   List<Ngo> getNgoByCatId(List<DocumentSnapshot> snapshots, int catId) {
@@ -19,6 +21,7 @@ class Ngo {
       Ngo ngo = new Ngo();
       ngo.catId = snapshot['cat_id'];
       ngo.ngoName = snapshot['ngo_name'];
+      ngo.phone = snapshot['phone'];
       if (ngo.catId == catId) {
         ngosForCatId.add(ngo);
       }
@@ -33,6 +36,7 @@ class Ngo {
       Ngo ngo = new Ngo();
       ngo.catId = snapshot['cat_id'];
       ngo.ngoName = snapshot['ngo_name'];
+      ngo.phone = snapshot['phone'];
       ngosForCatId.add(ngo);
     }
     return ngosForCatId;
