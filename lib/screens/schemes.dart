@@ -27,6 +27,16 @@ class _SchemesState extends State<Schemes> {
             height: 300,
             width: MediaQuery.of(context).size.width,
             color: Colors.redAccent,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              shrinkWrap: true,
+              padding: EdgeInsets.symmetric(vertical: 20.0,horizontal: 20.0),
+              children: <Widget>[
+                ModelCard(),
+                ModelCard(),
+                ModelCard(),
+              ],
+            ),
           ),
           Text("All",textAlign:TextAlign.start,style: TextStyle(
             fontWeight: FontWeight.w300,
