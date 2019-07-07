@@ -2,10 +2,21 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker_modern/image_picker_modern.dart';
+import 'package:skaid/network/apis.dart';
 
 import '../style.dart';
 
-
+const List<String> _ngoCategories = <String>[
+  'flake',
+  'cut',
+  'fragment',
+  'splinter',
+  'nick',
+  'fry',
+  'solder',
+  'cash in',
+  'eat',
+];
 
 class ReportForm extends StatefulWidget {
   @override
@@ -15,6 +26,14 @@ class ReportForm extends StatefulWidget {
 class _ReportFormState extends State<ReportForm> {
 
   File _image;
+
+  final _textController = TextEditingController();
+
+  @override
+  void dispose(){
+    _textController.dispose();
+    super.dispose();
+  }
 
   Future getImage() async {
     var image = await ImagePicker.pickImage(source: ImageSource.camera);
@@ -45,7 +64,6 @@ class _ReportFormState extends State<ReportForm> {
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[
             Expanded(
-
               flex: 1,
               child: _image == null
                   ? Image.asset('assets/images/placeholder.png',fit: BoxFit.cover,)
@@ -61,6 +79,16 @@ class _ReportFormState extends State<ReportForm> {
                 ),
               ),
             ),
+            /*Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  'Department',
+                  style: sectionLabel,
+                ),
+              ),
+            ),*/
             Align(
               alignment: Alignment.centerLeft,
               child: Padding(
@@ -76,6 +104,7 @@ class _ReportFormState extends State<ReportForm> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextField(
+                  controller: _textController,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(12.0))),
                     fillColor: Colors.white,
@@ -96,7 +125,11 @@ class _ReportFormState extends State<ReportForm> {
                 borderRadius: BorderRadius.all(Radius.circular(7.0)),
               ),
               onPressed: () {
-                getImage();
+                addRequest(1, false, "orgName", _textController.text).then((result){
+                  Navigator.pop(context);
+                }
+                );
+                //getImage();
               },
             )
           ],
@@ -105,3 +138,22 @@ class _ReportFormState extends State<ReportForm> {
     );
   }
 }
+
+/*final List<Widget> tiles = <Widget>[
+      const SizedBox(height: 8.0, width: 0.0),
+      _ChipsTile(label: 'Available Materials (Chip)', children: chips),
+      _ChipsTile(label: 'Available Tools (InputChip)', children: inputChips),
+      _ChipsTile(label: 'Choose a Material (ChoiceChip)', children: choiceChips),
+      _ChipsTile(label: 'Choose Tools (FilterChip)', children: filterChips),
+      _ChipsTile(label: 'Perform Allowed Action (ActionChip)', children: actionChips),
+      const Divider(),
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Center(
+          child: Text(
+            _createResult(),
+            style: theme.textTheme.title,
+          ),
+        ),
+      ),
+];*/
