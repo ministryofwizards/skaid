@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "739869959",
+    "firebase_url": "https://flutterhackathon-d3567.firebaseio.com",
+    "project_id": "flutterhackathon-d3567",
+    "storage_bucket": "flutterhackathon-d3567.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:739869959:android:3e2e11885e73178a",
+        "android_client_info": {
+          "package_name": "com.mow.skaid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "739869959-gk24ce2dqh8s1fsv7erhfqlotepcs68s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUkm8v6hsFYoUW8CB6le1PDW0oFK5YHeA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "739869959-gk24ce2dqh8s1fsv7erhfqlotepcs68s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
