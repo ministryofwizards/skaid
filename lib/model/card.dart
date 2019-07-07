@@ -10,9 +10,10 @@ class ModelCard extends StatelessWidget {
         margin: EdgeInsets.all(20.0),
         width: 250.0,
         height: 150.0,
-        child: Center(
-          child: Text("card"),
-        ),
+        child: ListTile(
+          title: Text("Scheme Name"),
+          subtitle: Text("discription"),
+        )
       )
     );
   }
