@@ -9,17 +9,26 @@ class Home extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: new AppBar(
-          title: Text('Skaid'),
+          backgroundColor: Color.fromRGBO(58, 28, 113,1),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Image.asset("assets/images/logo2.png"),
+              Text("Skaid")
+            ],
+          ),
+         
           bottom: TabBar(
+            indicatorColor:  Color.fromRGBO(255, 175, 123,1),
             tabs: <Widget>[
               Tab(
                 text: 'Schemes',
-                icon: Icon(Icons.import_contacts),
+                icon: Icon(Icons.import_contacts,),
               ),
               Tab(
                 text: 'Reports',
-                icon: Icon(Icons.assignment),
-              )
+                icon: Icon(Icons.assignment,),
+              ),
             ],
           ),
         ),
